@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mvp_app/controller/fileController.dart';
 import 'controller/CameraController.dart';
+import 'controller/TranslateController.dart';
 import 'controller/YoloController.dart';
 import 'controller/controller.dart';
 
@@ -12,5 +13,7 @@ class CounterBinding extends Bindings {
     Get.lazyPut<CounterController>(() => CounterController());
     Get.lazyPut<FileController>(() => FileController());
     Get.lazyPut<CameraAIController>(() => CameraAIController());
+    Get.lazyPut<SpeechController>(() => SpeechController());
+
   }
 }

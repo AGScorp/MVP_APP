@@ -23,28 +23,41 @@ class FaceLiveness extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
 
-          return Stack(
+          return Column(
             children: [
-              CameraPreview(controller.cameraController.value!),
-              _buildOverlay(),
-              if (!controller.isProcessing.value) // Check processing state
-                Positioned(
-                  bottom: 30,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                        backgroundColor: Colors.blueAccent, // Button color
+              Stack(
+                children: [
+                  CameraPreview(controller.cameraController.value!),
+                  _buildOverlay(),
+                  if (!controller.isProcessing.value) // Check processing state
+                    Positioned(
+                      bottom: 29,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                            backgroundColor: Colors.blueAccent, // Button color
+                          ),
+                          onPressed: controller.startLivenessCheck,
+                          child: Text('Start Liveness Check'),
+                        ),
                       ),
-                      onPressed: controller.startLivenessCheck,
-                      child: Text('Start Liveness Check'),
                     ),
-                  ),
-                ),
+                ],
+              ),
+          ElevatedButton(
+          style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+          backgroundColor: Colors.grey, // Button color
+          ),
+          onPressed:() async { await controller.sendImageToUnlock(context);} ,
+          child: Text('Liveness Check \n  (Not Done)'),
+          ),
             ],
           );
+
         },
       ),
     );

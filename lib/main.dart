@@ -6,9 +6,11 @@ import 'package:mvp_app/view/facecompaer.dart';
 import 'package:mvp_app/view/filePicker.dart';
 import 'package:mvp_app/view/showList.dart';
 import 'package:mvp_app/view/test.dart';
+import 'package:mvp_app/view/translate.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'blinding.dart';
+import 'controller/TranslateController.dart';
 import 'controller/controller.dart';
 import 'package:get/get.dart';
 
@@ -62,46 +64,57 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: GridView.count(
+          crossAxisCount: 3,
+          padding: EdgeInsets.all(16.0),
           children: <Widget>[
-            ElevatedButton(
-                onPressed: () {
-                  Get.to(FilePickerPage());
-                },
-                child: Text('File Picker')),
-            ElevatedButton(
-                onPressed: () {
-                  Get.to(() => CameraPage());
-                },
-                child: Text('Object Detect')),
-            ElevatedButton(
-                onPressed: () {
-                  Get.to(() => Facecompaer_view());
-                },
-                child: Text('Face Detect')),
-            ElevatedButton(
-                onPressed: () {
-                  Get.to(() => DetectionListPage());
-                },
-                child: Text('DetectionListPage')),
-            ElevatedButton(
-                onPressed: () {
-                  Get.to(() => CompareAndDetect());
-                },
-                child: Text('CompareAndDetect'))
-            , ElevatedButton(
-                onPressed: () {
-                  Get.to(() => FaceLiveness());
-                },
-                child: Text('Face Liveness \n need API'))
+            _buildButton('File Picker', () => Get.to(FilePickerPage())),
+            _buildButton('Object Detect', () => Get.to(() => CameraPage())),
+            _buildButton('Face Detect', () => Get.to(() => Facecompaer_view())),
+            _buildButton('Detection List', () => Get.to(() => DetectionListPage())),
+            _buildButton('Compare and Detect', () => Get.to(() => CompareAndDetect())),
+            _buildButton('Face Liveness\n(need API)', () => Get.to(() => FaceLiveness())),
+            _buildButton('Speech to Text', () => Get.to(() => SpeechToTextPage())),
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: counterController.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+
+  Widget _buildButton(String title, Function() onPressed) {
+    return Card(
+      elevation: 4,
+      margin: EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: onPressed,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blueAccent, Colors.lightBlue],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 20.0),
+          alignment: Alignment.center,
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }

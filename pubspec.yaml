@@ -46,14 +46,15 @@ dependencies:
   flutter_tts: ^4.0.2
   sentry_flutter: ^8.9.0
   cupertino_icons: ^1.0.2
-
+  googleapis: ^13.2.0
+  audioplayers: ^6.1.0
+  speech_to_text: ^7.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   tflite_flutter: 0.11.0
   flutter_lints: ^4.0.0
-
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
